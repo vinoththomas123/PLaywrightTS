@@ -11,7 +11,6 @@ pipeline {
 
     environment {
         CI = 'true'
-        APP_URL = "${params.APP_URL}"
     }
 
     stages {
@@ -32,14 +31,22 @@ pipeline {
         stage('Run Playwright tests') {
             steps {
                 script {
-                    if (isUnix()) {
-                        sh 'npx playwright test --project=chromium'
-                    } else {
-                        bat 'npx playwright test --project=chromium'
+                    def appUrl = params.APP_URL?.trim()
+
+                    if (!appUrl) {
+                        error 'APP_URL is not set. Provide it when starting the Jenkins build.'
+                    }
+
+                    withEnv(["APP_URL=${appUrl}"]) {
+                        if (isUnix()) {
+                            sh 'npx playwright test --project=chromium'
+                        } else {
+                            bat 'npx playwright test --project=chromium'
+                        }
                     }
                 }
             }
-        }
+        }        
     }
 
     post {
