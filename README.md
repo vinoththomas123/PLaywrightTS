@@ -1,0 +1,2 @@
+# PLaywrightTS
+Playwright Typescript project
