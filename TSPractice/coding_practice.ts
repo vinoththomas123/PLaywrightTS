@@ -156,11 +156,11 @@ let nestedArray = [1, [2, [3, 4]], 5];
 let flatArray: number[] = [];
 
 function flatten(array: any[]): void {
-    for (let value of array) {
-        if (Array.isArray(value)) {
-            flatten(value);
+    for (let item of array) {
+        if (Array.isArray(item)) {
+            flatten(item);
         } else {
-            flatArray.push(value);
+            flatArray.push(item);
         }
     }
 }
@@ -168,3 +168,39 @@ function flatten(array: any[]): void {
 flatten(nestedArray);
 
 console.log(flatArray);
+
+// Using a object for getting occurrences
+str = "bbccceejjjddfhhht";
+
+let obj: { [key: string]: number } = {};
+
+for (let item of str) {
+    obj[item] = (obj[item] || 0) + 1;
+}
+
+console.log(obj)
+
+let entries = Object.entries(obj);
+
+for (let [key, value] of entries){
+    
+    if (value===1){
+        console.log (key , value);
+    }
+}
+
+let json = {
+    emp: "John",
+    age: 25,
+    code: 1005,
+    phone: 8855997722
+}
+
+console.log(json.emp);
+console.log(json["phone"]);
+
+
+
+
+
+
