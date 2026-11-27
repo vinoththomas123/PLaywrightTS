@@ -31,6 +31,7 @@ export default defineConfig({
         ['dot'],    // Displays compact progress in the CI terminal
         ['junit', { outputFile: 'test-results/results.xml' }],
         ['html', { open: 'never' }],
+        ['json', { outputFile: 'test-results/results.json' }]
     ]
   : [
         ['list'], //Shows readable test output in your terminal
